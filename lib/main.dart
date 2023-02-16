@@ -1,4 +1,7 @@
-import 'package:dental_clinic/home_page.dart';
+import 'package:dental_clinic/pages/home_page.dart';
+import 'package:dental_clinic/pages/blog_page.dart';
+import 'package:dental_clinic/pages/profile_page.dart';
+import 'package:dental_clinic/pages/queue_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';
 
@@ -28,14 +31,20 @@ class Rootpage extends StatefulWidget {
 
 class _RootpageState extends State<Rootpage> {
   int currentPage = 0;
-
+  int privillage = 0;
+  List<Widget> pages = const [
+    Homepage(),
+    QueuePage(),
+    BlogPage(),
+    ProfilePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("We Smile+"),
       ),
-      body: const Homepage(),
+      body: pages[currentPage],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint("Floating Action Button");

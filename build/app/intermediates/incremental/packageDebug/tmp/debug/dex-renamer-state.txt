@@ -1,4 +1,4 @@
-#Fri Feb 03 23:48:57 ICT 2023
-base.0=D\:\\GitHub\\Mobile47\\dental_clinic\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Wed Feb 15 16:28:36 ICT 2023
+base.0=D\:\\GitHub\\Project\\Project47-Mobile\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
