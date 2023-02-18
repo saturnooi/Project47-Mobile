@@ -41,15 +41,12 @@ class _RootpageState extends State<Rootpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("We Smile+"),
-      ),
       body: pages[currentPage],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint("Floating Action Button");
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: NavigationBar(
         destinations: const [

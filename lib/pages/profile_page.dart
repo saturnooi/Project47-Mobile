@@ -12,9 +12,21 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              height: 100,
+              height: 70,
             ),
-            Text("This Profile Page"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Profile'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Treatment'),
+                ),
+              ],
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:dental_clinic/pages/register.dart';
 import 'package:flutter/material.dart';
 import 'package:dental_clinic/components/my_button.dart';
 import 'package:dental_clinic/components/my_textfield.dart';
@@ -16,7 +17,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.cyan[300],
       body: SafeArea(
         child: Center(
           child: Column(
@@ -29,8 +30,6 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 50)),
 
               const SizedBox(height: 50),
-
-              const SizedBox(height: 25),
 
               // username textfield
               MyTextField(
@@ -64,29 +63,37 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 40),
 
               // sign in button
               MyButton(
                 onTap: signUserIn,
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
 
               // not a member? register now
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Not a member?',
+                    'Don\' have an account?',
                     style: TextStyle(color: Colors.grey[700]),
                   ),
-                  const SizedBox(width: 4),
-                  const Text(
-                    'Register now',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
+                  const SizedBox(width: 1),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return const Register();
+                          },
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Register Now",
+                      style: TextStyle(color: Colors.cyan),
                     ),
                   ),
                 ],
