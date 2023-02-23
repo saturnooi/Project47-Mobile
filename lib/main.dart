@@ -1,5 +1,6 @@
 import 'package:dental_clinic/pages/home_page.dart';
 import 'package:dental_clinic/pages/blog_page.dart';
+
 import 'package:dental_clinic/pages/profile_page.dart';
 import 'package:dental_clinic/pages/queue_page.dart';
 import 'package:flutter/material.dart';
@@ -32,11 +33,13 @@ class Rootpage extends StatefulWidget {
 class _RootpageState extends State<Rootpage> {
   int currentPage = 0;
   int privillage = 0;
-  List<Widget> pages = const [
+  List<Widget> pages = [
     Homepage(),
     QueuePage(),
-    BlogPage(),
-    ProfilePage(),
+    DisplayDataScreen(),
+    ProfileScreen(
+      userId: 1,
+    ),
   ];
   @override
   Widget build(BuildContext context) {
