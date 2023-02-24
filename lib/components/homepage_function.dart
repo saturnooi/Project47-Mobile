@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:dental_clinic/pages/appointment.dart';
 
 class HomeFunction extends StatelessWidget {
   const HomeFunction({super.key});
@@ -32,7 +33,14 @@ class HomeFunction extends StatelessWidget {
               width: 20,
             ),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Appointment(),
+                  ),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

@@ -108,12 +108,15 @@ class _LearnFlutterPageState extends State<LearnFlutterPage> {
                   });
                 }),
             Checkbox(
-                value: isCheckbox,
-                onChanged: (bool? newBool) {
-                  setState(() {
+              value: isCheckbox,
+              onChanged: (bool? newBool) {
+                setState(
+                  () {
                     isCheckbox = newBool;
-                  });
-                }),
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),
