@@ -2,6 +2,7 @@ import 'package:dental_clinic/learn.dart';
 import 'package:dental_clinic/components/homepage_function.dart';
 import 'package:dental_clinic/components/blog_slide.dart';
 import "package:flutter/material.dart";
+import 'package:dental_clinic/components/homepage_info.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -28,7 +29,7 @@ class Homepage extends StatelessWidget {
                 fit: BoxFit.cover, // Scale and crop the image to fit the box
               ),
             ),
-            HomeFunction(),
+            const HomeFunction(),
             const SizedBox(
               height: 30,
             ),
@@ -40,6 +41,10 @@ class Homepage extends StatelessWidget {
                 'https://www.slcclinic.com/uploads/images/211224150018W474-940p.jpg',
               ],
             ),
+            const SizedBox(
+              height: 30,
+            ),
+            const HomeInfo(),
           ],
         ),
       ),
