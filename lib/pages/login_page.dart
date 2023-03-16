@@ -1,10 +1,11 @@
 import 'package:dental_clinic/pages/main_page.dart';
 import 'package:dental_clinic/pages/register.dart';
 import 'package:flutter/material.dart';
+import 'package:postgres/postgres.dart';
+import 'package:dental_clinic/pages/main_page.dart';
 import 'package:dental_clinic/components/my_button.dart';
 import 'package:dental_clinic/components/my_textfield.dart';
 import 'package:dental_clinic/components/square_tile.dart';
-import 'package:dental_clinic/api.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,10 +15,53 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-  void signUserIn() {}
+  String? _errorMessage;
+
+  Future<void> _handleLogin() async {
+    final username = _usernameController.text;
+    final password = _passwordController.text;
+
+    final conn = PostgreSQLConnection(
+      'localhost',
+      5432,
+      'clinic',
+      username: 'postgres',
+      password: '1234',
+    );
+    await conn.open();
+
+    final results = await conn.query(
+      'SELECT * FROM patient WHERE username = @username',
+      substitutionValues: {'username': username},
+    );
+    if (results.isEmpty) {
+      setState(() {
+        _errorMessage = 'Invalid username or password.';
+      });
+      return;
+    }
+
+    final user = results.first.toColumnMap();
+    if (user['pass'] != password) {
+      setState(() {
+        _errorMessage = 'Invalid username or password.';
+      });
+      return;
+    }
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Mainpage(),
+      ),
+    );
+
+    await conn.close();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: SizedBox(
                   width: 350,
                   child: TextFormField(
-                    controller: usernameController,
+                    controller: _usernameController,
                     obscureText: false,
                     decoration: InputDecoration(
                       enabledBorder: const UnderlineInputBorder(
@@ -52,9 +96,9 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: "Username",
                       hintStyle: const TextStyle(color: Colors.white),
                     ),
-                    validator: (val) {
-                      if (val == null) {
-                        return "Empty User";
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your username.';
                       }
                       return null;
                     },
@@ -69,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: SizedBox(
                   width: 350,
                   child: TextFormField(
-                    controller: passwordController,
+                    controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       enabledBorder: const UnderlineInputBorder(
@@ -80,9 +124,9 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: "Password",
                       hintStyle: const TextStyle(color: Colors.white),
                     ),
-                    validator: (val) {
-                      if (val == null) {
-                        return "Empty Pass";
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password.';
                       }
                       return null;
                     },
@@ -111,12 +155,7 @@ class _LoginPageState extends State<LoginPage> {
               // sign in button
               GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Mainpage(),
-                    ),
-                  );
+                  _handleLogin();
                 },
                 child: Container(
                   padding: const EdgeInsets.all(10),
@@ -150,15 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(width: 1),
                   TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return const Register();
-                          },
-                        ),
-                      );
-                    },
+                    onPressed: () {},
                     child: const Text(
                       "Register Now",
                       style: TextStyle(color: Colors.cyan),
