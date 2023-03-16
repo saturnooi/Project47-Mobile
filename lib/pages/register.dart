@@ -14,10 +14,18 @@ class _RegisterState extends State<Register> {
   var pages = [register1(), register2(), register3()];
 
   @override
+  final formKey = GlobalKey<FormState>();
+
+  Future sign_up() async {
+    String url = "";
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        children: pages,
+      body: Form(
+        child: PageView(
+          children: pages,
+        ),
       ),
     );
   }

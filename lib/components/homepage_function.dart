@@ -1,7 +1,11 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:dental_clinic/api.dart';
+import 'package:dental_clinic/pages/queue_page.dart';
+import 'package:dental_clinic/pages/service_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dental_clinic/pages/appointment.dart';
+import 'package:dental_clinic/pages/dentist_page.dart';
+import 'package:dental_clinic/pages/blog_page.dart';
+import 'package:dental_clinic/pages/review_page.dart';
 
 class HomeFunction extends StatelessWidget {
   const HomeFunction({super.key});
@@ -13,7 +17,14 @@ class HomeFunction extends StatelessWidget {
         Row(
           children: [
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QueuePage(),
+                  ),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -60,7 +71,14 @@ class HomeFunction extends StatelessWidget {
               width: 20,
             ),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DisplayDataScreen(),
+                  ),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -84,7 +102,14 @@ class HomeFunction extends StatelessWidget {
         Row(
           children: [
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Dentist_Information(),
+                  ),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -104,7 +129,14 @@ class HomeFunction extends StatelessWidget {
               width: 20,
             ),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Service(),
+                  ),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -124,7 +156,14 @@ class HomeFunction extends StatelessWidget {
               width: 20,
             ),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Review(),
+                  ),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[

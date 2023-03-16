@@ -1,24 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:dental_clinic/learn.dart';
 import 'package:dental_clinic/components/homepage_function.dart';
 import 'package:dental_clinic/components/blog_slide.dart';
 import "package:flutter/material.dart";
 import 'package:dental_clinic/components/homepage_info.dart';
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_left),
-        ),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications_active))
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -51,26 +48,3 @@ class Homepage extends StatelessWidget {
     );
   }
 }
-
-
-// class Homepage extends StatelessWidget {
-//   const Homepage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: ElevatedButton(
-//         onPressed: () {
-//           Navigator.of(context).push(
-//             MaterialPageRoute(
-//               builder: (BuildContext context) {
-//                 return const LearnFlutterPage();
-//               },
-//             ),
-//           );
-//         },
-//         child: const Text("Learn Flutter"),
-//       ),
-//     );
-//   }
-// }

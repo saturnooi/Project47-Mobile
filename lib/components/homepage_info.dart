@@ -9,12 +9,15 @@ class HomeInfo extends StatelessWidget {
       children: [
         Column(
           children: [
-            const Text('Hello world!!'),
-            const Text('This is dart'),
+            const Text('We Smile+ Clinic'),
+            const Text('เปิดบริการ 10.00 - 20.00 น.'),
+            const Text('ตั้งอยู่ที่ 321 ถ.เฉลิมพระเกียรติ'),
+            const Text('แขวงหนองบอน เขตประเวศ'),
+            const Text('กรุงเทพ 10520'),
           ],
         ),
         Image.asset(
-          'images/google.png',
+          'images/clinic.jpg',
           width: 100,
           height: 100,
         ),

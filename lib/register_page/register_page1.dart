@@ -17,6 +17,15 @@ class _register1State extends State<register1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(

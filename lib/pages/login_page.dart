@@ -1,24 +1,29 @@
+import 'package:dental_clinic/pages/main_page.dart';
 import 'package:dental_clinic/pages/register.dart';
 import 'package:flutter/material.dart';
 import 'package:dental_clinic/components/my_button.dart';
 import 'package:dental_clinic/components/my_textfield.dart';
 import 'package:dental_clinic/components/square_tile.dart';
+import 'package:dental_clinic/api.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-  // text editing controllers
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  // sign user in method
   void signUserIn() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan[300],
-      body: SafeArea(
+      body: Form(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -31,20 +36,58 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 50),
 
-              // username textfield
-              MyTextField(
-                controller: usernameController,
-                hintText: 'Username',
-                obscureText: false,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: SizedBox(
+                  width: 350,
+                  child: TextFormField(
+                    controller: usernameController,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      hintText: "Username",
+                      hintStyle: const TextStyle(color: Colors.white),
+                    ),
+                    validator: (val) {
+                      if (val == null) {
+                        return "Empty User";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
               ),
 
               const SizedBox(height: 10),
 
-              // password textfield
-              MyTextField(
-                controller: passwordController,
-                hintText: 'Password',
-                obscureText: true,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: SizedBox(
+                  width: 350,
+                  child: TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      hintText: "Password",
+                      hintStyle: const TextStyle(color: Colors.white),
+                    ),
+                    validator: (val) {
+                      if (val == null) {
+                        return "Empty Pass";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
               ),
 
               const SizedBox(height: 10),
@@ -66,8 +109,33 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 40),
 
               // sign in button
-              MyButton(
-                onTap: signUserIn,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Mainpage(),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(horizontal: 60),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Sign In",
+                      style: TextStyle(
+                        color: Colors.cyan,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
               const SizedBox(height: 30),

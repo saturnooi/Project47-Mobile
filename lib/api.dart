@@ -1,48 +1,46 @@
-import 'package:mysql_utils/mysql1/mysql1.dart';
+import 'package:flutter/material.dart';
+import 'package:postgres/postgres.dart';
 
-ConnectionSettings getConnectionSettings() {
-  return ConnectionSettings(
-      host: 'localhost',
-      port: 3306,
-      user: 'tum',
-      password: '1234',
-      db: 'clinic');
-}
+Future operation() async {
+  var conn = PostgreSQLConnection(
+    'db-postgresql-sgp1-56608-do-',
+    25060,
+    'defaultdb',
+    username: 'doadmin',
+    password: 'AVNS_bXQmx_V8B3bMS_Dhhh2',
+  );
 
-class User {
-  final int id;
-  final String user;
-  final String email;
-  final String fullname;
-  final String idcard;
-  final DateTime birthdate;
-  final String phone;
-  final Blob disease;
-  final Blob allergy;
+  try {
+    await conn.open();
+    print("Connected");
+  } catch (e) {
+    print("error");
+    print(e.toString());
+  }
 
-  // ... other user data fields
-
-  User({
-    required this.id,
-    required this.user,
-    required this.email,
-    required this.fullname,
-    required this.idcard,
-    required this.birthdate,
-    required this.phone,
-    required this.disease,
-    required this.allergy,
-
-    // ... other user data fields
-  });
+  Future<List<News>> getNews() async {
+    final results = await conn.query('SELECT * FROM news');
+    final news = results
+        .map((row) => News(
+              writer_id: results[0][0] as int,
+              topic: results[0][1] as String,
+              detail: results[0][2] as String,
+              date_write: results[0][3] as DateTime,
+            ))
+        .toList();
+    return news;
+  }
 }
 
 class News {
+  final int writer_id;
   final String topic;
   final String detail;
+  final DateTime date_write;
 
-  News({
-    required this.topic,
-    required this.detail,
-  });
+  News(
+      {required this.writer_id,
+      required this.topic,
+      required this.detail,
+      required this.date_write});
 }
