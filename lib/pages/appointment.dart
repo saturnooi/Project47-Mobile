@@ -1,29 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:postgres/postgres.dart';
 
 class Appointment extends StatefulWidget {
-  const Appointment({super.key});
+  const Appointment({Key? key, required this.userId}) : super(key: key);
+
+  final int userId;
 
   @override
   State<Appointment> createState() => _AppointmentState();
 }
 
 class _AppointmentState extends State<Appointment> {
-  final symptom = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _symtomController = TextEditingController();
   bool? isCheckbox = false;
   DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now().replacing(minute: 0);
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2025),
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
       });
     }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null && picked != selectedTime) {
+      setState(() {
+        selectedTime = picked;
+      });
+    }
+  }
+
+  List<TimeOfDay> getAvailableTimes() {
+    final start = TimeOfDay(hour: 8, minute: 0);
+    final end = TimeOfDay(hour: 17, minute: 0);
+    final availableTimes = <TimeOfDay>[];
+    var time = start;
+    while (time == end) {
+      availableTimes.add(time);
+      time = time.replacing(
+          minute: time.minute == 0 ? 30 : 0,
+          hour: time.minute == 30 ? time.hour + 1 : time.hour);
+    }
+    return availableTimes;
+  }
+
+  late PostgreSQLConnection _connection;
+
+  @override
+  void initState() {
+    super.initState();
+    _connectToDatabase();
+  }
+
+  Future<void> _connectToDatabase() async {
+    _connection = PostgreSQLConnection(
+      'localhost',
+      5432,
+      'clinic',
+      username: 'postgres',
+      password: '1234',
+    );
+
+    await _connection.open();
+  }
+
+  Future<void> _insertAppointment() async {
+    final String symtom = _symtomController.text;
+
+    await _connection.query(
+      'INSERT INTO appointment (patient_id, symtom, date_appoint,time_appoint) VALUES (@patient_id,@symtom, @date_appoint, @time_appoint)',
+      substitutionValues: {
+        'patient_id': widget.userId,
+        'symtom': symtom,
+        'date_appoint': selectedDate.toIso8601String(),
+        'time_appoint': selectedTime.format(context),
+      },
+    );
   }
 
   @override
@@ -43,7 +114,7 @@ class _AppointmentState extends State<Appointment> {
           child: Column(
             children: [
               TextField(
-                controller: symptom,
+                controller: _symtomController,
                 decoration: InputDecoration(
                   hintText: "Sypmtom",
                 ),
@@ -81,11 +152,33 @@ class _AppointmentState extends State<Appointment> {
                       ),
                     ),
                   ),
+                  InkWell(
+                    onTap: () => _selectTime(context),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 12.0, horizontal: 16.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.calendar_today_outlined),
+                          SizedBox(width: 8.0),
+                          Text(
+                            "${selectedTime.hour}:${selectedTime.minute}",
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
               ElevatedButton(
                 onPressed: () {
                   debugPrint("Elevated Button");
+                  _insertAppointment();
                 },
                 child: const Text('Confirm'),
               ),

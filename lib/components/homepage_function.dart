@@ -21,7 +21,9 @@ class HomeFunction extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QueuePage(),
+                    builder: (context) => QueuePage(
+                      userId: 1,
+                    ),
                   ),
                 );
               },
@@ -48,7 +50,9 @@ class HomeFunction extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Appointment(),
+                    builder: (context) => Appointment(
+                      userId: 1,
+                    ),
                   ),
                 );
               },

@@ -23,7 +23,9 @@ class _MainpageState extends State<Mainpage> {
   int privillage = 0;
   List<Widget> pages = [
     Homepage(),
-    QueuePage(),
+    QueuePage(
+      userId: 1,
+    ),
     DisplayDataScreen(),
     ProfilePage(userId: 1)
   ];
@@ -64,7 +66,9 @@ class _MainpageState extends State<Mainpage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Appointment(),
+                builder: (context) => Appointment(
+                  userId: 1,
+                ),
               ),
             );
           },
