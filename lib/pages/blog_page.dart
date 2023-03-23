@@ -38,14 +38,34 @@ class _DisplayDataScreenState extends State<DisplayDataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: ListView.builder(
         itemCount: _data.length,
         itemBuilder: (context, index) {
           final item = _data[index];
           return Card(
-            child: ListTile(
-              title: Text(item['topic']),
-              subtitle: Text(item['detail']),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(item['topic']),
+                  subtitle: Text(item['detail']),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Read more>>",
+                    style: TextStyle(color: Colors.cyan),
+                  ),
+                ),
+              ],
             ),
           );
         },

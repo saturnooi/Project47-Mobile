@@ -26,8 +26,8 @@ class _QueuePageState extends State<QueuePage> {
     await conn.open();
 
     final results = await conn.query(
-      'SELECT * FROM appointment WHERE patient_id = @patient_id',
-      substitutionValues: {'patient_id': widget.userId},
+      'SELECT * FROM appointment WHERE patient_id = @patient_id AND status = @status',
+      substitutionValues: {'patient_id': widget.userId, 'status': "ยืนยัน"},
     );
     setState(() {
       _data = results.map((row) => row.toColumnMap()).toList();
@@ -62,17 +62,22 @@ class _QueuePageState extends State<QueuePage> {
           final day = DateFormat.d().format(date);
           final month = DateFormat.MMM().format(date);
           final year = DateFormat.y().format(date);
+          // String showTime = "เวลา = $item[time_appoint']";
           return Card(
             child: ListTile(
               title: Row(
                 children: [
                   Text("วันที่"),
+                  const SizedBox(width: 5),
                   Text(day),
                   const SizedBox(width: 5),
                   Text(month),
                   const SizedBox(width: 5),
                   Text(year),
-                  Text("เวลา"),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('ยกเลิก'),
+                  ),
                 ],
               ),
               subtitle: Text(item['symtom']),

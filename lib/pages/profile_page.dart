@@ -56,6 +56,18 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text('Profile'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text('Treatment'),
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     width: 120,
                     height: 120,
