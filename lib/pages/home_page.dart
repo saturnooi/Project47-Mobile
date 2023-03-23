@@ -19,29 +19,38 @@ class _HomepageState extends State<Homepage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // AspectRatio(
-            //   aspectRatio: 1.0, // Set aspect ratio to 1:1 for a square shape
-            //   child: Image.network(
-            //     'https://img.freepik.com/free-vector/people-sitting-hospital-corridor-waiting-doctor-patient-clinic-visit-flat-vector-illustration-medicine-healthcare_74855-8507.jpg?w=360', // Replace with your image URL
-            //     fit: BoxFit.cover, // Scale and crop the image to fit the box
-            //   ),
-            // ),
-            const HomeFunction(),
+            AspectRatio(
+              aspectRatio: 1.0, // Set aspect ratio to 1:1 for a square shape
+              child: Image.asset(
+                'images/318155147_157128447061141_6356677895157760046_n.jpg', // Replace with your image URL
+                fit: BoxFit.cover, // Scale and crop the image to fit the box
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: HomeFunction(),
+            ),
             const SizedBox(
               height: 30,
             ),
             // BlogSlide(
             //   imageUrls: [
-            //     'https://www.seraclinics.com/wp-content/uploads/2023/02/FD202.png',
-            //     'https://www.storynow.co/wp-content/uploads/2022/07/DMC-PR-News-02-628x628.jpg',
-            //     'https://www.rcskinclinic.com/getattachment/news-activities/%E0%B8%AA%E0%B8%B2%E0%B8%82%E0%B8%B2%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%80%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%8A%E0%B9%88%E0%B8%A7%E0%B8%87%E0%B8%9B%E0%B8%B5%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88-2019/news-clinic-close-New-year62-detail-(4).jpg.aspx',
-            //     'https://www.slcclinic.com/uploads/images/211224150018W474-940p.jpg',
+            //     'images/promotion/328826896_971407020562041_1061909101623740239_n.jpg',
+            //     'images/promotion/333850256_1376115003210566_6169689804045578564_n.jpg',
+            //     'images/promotion/335158455_537778948344332_5717943067385041327_n.jpg',
+            //     'images/promotion/334163536_174009198739350_8560160510853555590_n.jpg',
             //   ],
             // ),
             const SizedBox(
               height: 30,
             ),
-            const HomeInfo(),
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: HomeInfo(),
+            ),
           ],
         ),
       ),

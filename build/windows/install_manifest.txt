@@ -3,6 +3,8 @@ D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/flutter_windows.dl
 D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/AssetManifest.json
 D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/FontManifest.json
 D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/images/280035994_109465261757757_4740652056934378705_n.jpg
+D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/images/318155147_157128447061141_6356677895157760046_n.jpg
 D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/images/apple.png
 D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/images/clinic.jpg
 D:/GitHub/Project/Project47-Mobile/build/windows/runner/Debug/data/flutter_assets/images/google.png

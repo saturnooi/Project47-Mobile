@@ -16,10 +16,14 @@ class HomeInfo extends StatelessWidget {
             const Text('กรุงเทพ 10520'),
           ],
         ),
+        const SizedBox(
+          width: 30,
+        ),
         Image.asset(
           'images/clinic.jpg',
           width: 100,
           height: 100,
+          fit: BoxFit.fill,
         ),
       ],
     );

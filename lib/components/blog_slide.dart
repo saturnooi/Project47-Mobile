@@ -30,7 +30,7 @@ class _BlogSlideState extends State<BlogSlide> {
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: AspectRatio(
               aspectRatio: 1.0,
-              child: Image.network(
+              child: Image.asset(
                 widget.imageUrls[index],
                 fit: BoxFit.cover,
               ),

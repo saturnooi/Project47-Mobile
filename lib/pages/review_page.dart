@@ -51,10 +51,13 @@ class _ReviewState extends State<Review> {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ElevatedButton(
+              OutlinedButton(
                 onPressed: () {
                   setState(() {
                     _selectedScore = 0; // select all scores
@@ -64,7 +67,7 @@ class _ReviewState extends State<Review> {
               ),
               const SizedBox(width: 10),
               for (int score = 1; score <= 5; score++)
-                ElevatedButton(
+                OutlinedButton(
                   onPressed: () {
                     setState(() {
                       _selectedScore = score;
@@ -78,6 +81,9 @@ class _ReviewState extends State<Review> {
                   ),
                 ),
             ],
+          ),
+          const SizedBox(
+            height: 30,
           ),
           Expanded(
             child: ListView.builder(
@@ -101,7 +107,25 @@ class _ReviewState extends State<Review> {
                           );
                         }),
                       ),
-                      Text(item['comment_review']),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'ความคิดเห็น :',
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            item['comment_review'],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
                     ],
                   ),
                 );

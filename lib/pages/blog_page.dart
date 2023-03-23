@@ -58,11 +58,14 @@ class _DisplayDataScreenState extends State<DisplayDataScreen> {
                   title: Text(item['topic']),
                   subtitle: Text(item['detail']),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Read more>>",
-                    style: TextStyle(color: Colors.cyan),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Read more>>",
+                      style: TextStyle(color: Colors.cyan),
+                    ),
                   ),
                 ),
               ],

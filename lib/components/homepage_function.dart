@@ -29,13 +29,13 @@ class HomeFunction extends StatelessWidget {
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
+                children: const <Widget>[
+                  Icon(
                     Icons.calendar_month_outlined,
                     size: 50,
                   ),
-                  const SizedBox(height: 10.0),
-                  const Text(
+                  SizedBox(height: 10.0),
+                  Text(
                     'Queue',
                     style: TextStyle(fontSize: 16.0, color: Colors.black),
                   ),
@@ -58,13 +58,13 @@ class HomeFunction extends StatelessWidget {
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
+                children: const <Widget>[
+                  Icon(
                     Icons.add_circle_outline,
                     size: 50,
                   ),
-                  const SizedBox(height: 10.0),
-                  const Text(
+                  SizedBox(height: 10.0),
+                  Text(
                     'Booking',
                     style: TextStyle(fontSize: 16.0, color: Colors.black),
                   ),
