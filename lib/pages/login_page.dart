@@ -56,7 +56,9 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => Mainpage(),
+        builder: (context) => Mainpage(
+          userId: user['id'],
+        ),
       ),
     );
 
@@ -87,14 +89,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextFormField(
                     controller: _usernameController,
                     obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: const UnderlineInputBorder(
+                    decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
                         ),
                       ),
                       hintText: "Username",
-                      hintStyle: const TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.white),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -115,14 +117,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextFormField(
                     controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
-                      enabledBorder: const UnderlineInputBorder(
+                    decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.white,
                         ),
                       ),
                       hintText: "Password",
-                      hintStyle: const TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.white),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {

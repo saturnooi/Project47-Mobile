@@ -12,7 +12,9 @@ import 'package:dental_clinic/pages/appointment.dart';
 import 'package:dental_clinic/pages/home_page.dart';
 
 class Mainpage extends StatefulWidget {
-  const Mainpage({super.key});
+  const Mainpage({Key? key, required this.userId}) : super(key: key);
+
+  final int userId;
 
   @override
   State<Mainpage> createState() => _MainpageState();
@@ -21,14 +23,24 @@ class Mainpage extends StatefulWidget {
 class _MainpageState extends State<Mainpage> {
   int currentPage = 0;
   int privillage = 0;
-  List<Widget> pages = [
-    Homepage(),
-    QueuePage(
-      userId: 1,
-    ),
-    DisplayDataScreen(),
-    ProfilePage(userId: 1)
-  ];
+  late List<Widget> pages;
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [
+      Homepage(
+        userId: widget.userId,
+      ),
+      QueuePage(
+        userId: widget.userId,
+      ),
+      DisplayDataScreen(),
+      ProfilePage(
+        userId: widget.userId,
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +79,7 @@ class _MainpageState extends State<Mainpage> {
               context,
               MaterialPageRoute(
                 builder: (context) => Appointment(
-                  userId: 1,
+                  userId: widget.userId,
                 ),
               ),
             );
@@ -78,32 +90,5 @@ class _MainpageState extends State<Mainpage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
-    ;
   }
 }
-
-
-
-
-
-// class Homepage extends StatelessWidget {
-//   const Homepage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: ElevatedButton(
-//         onPressed: () {
-//           Navigator.of(context).push(
-//             MaterialPageRoute(
-//               builder: (BuildContext context) {
-//                 return const LearnFlutterPage();
-//               },
-//             ),
-//           );
-//         },
-//         child: const Text("Learn Flutter"),
-//       ),
-//     );
-//   }
-// }

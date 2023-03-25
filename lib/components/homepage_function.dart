@@ -8,7 +8,9 @@ import 'package:dental_clinic/pages/blog_page.dart';
 import 'package:dental_clinic/pages/review_page.dart';
 
 class HomeFunction extends StatelessWidget {
-  const HomeFunction({super.key});
+  const HomeFunction({Key? key, required this.userId}) : super(key: key);
+
+  final int userId;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class HomeFunction extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => QueuePage(
-                      userId: 1,
+                      userId: this.userId,
                     ),
                   ),
                 );
@@ -51,7 +53,7 @@ class HomeFunction extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => Appointment(
-                      userId: 1,
+                      userId: this.userId,
                     ),
                   ),
                 );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dental_clinic/components/profile_textfield.dart';
 import 'package:dental_clinic/api.dart';
-
+import 'package:dental_clinic/pages/history.dart';
 import 'package:postgres/postgres.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -63,7 +63,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text('Profile'),
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HistoryPage(
+                                userId: widget.userId,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text('Treatment'),
                       ),
                     ],

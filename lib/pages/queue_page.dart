@@ -26,15 +26,19 @@ class _QueuePageState extends State<QueuePage> {
     await conn.open();
 
     final results = await conn.query(
-      'SELECT * FROM appointment WHERE patient_id = @patient_id AND status = @status',
-      substitutionValues: {'patient_id': widget.userId, 'status': "ยืนยัน"},
-    );
+        'SELECT * FROM appointment WHERE patient_id = @patient_id',
+        substitutionValues: {'patient_id': widget.userId});
     setState(() {
       _data = results.map((row) => row.toColumnMap()).toList();
     });
 
     await conn.close();
   }
+
+  // Future<void> _dentistName() async {
+  //   await _connection.query('select fullname from dentist where id = @id',
+  //       substitutionValues: {});
+  // }
 
   @override
   void initState() {
@@ -74,13 +78,54 @@ class _QueuePageState extends State<QueuePage> {
                   Text(month),
                   const SizedBox(width: 5),
                   Text(year),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text('ยกเลิก'),
+                  item['status'] == 'รอการยืนยันจากคลินิก' ||
+                          item['status'] == 'ยืนยัน' ||
+                          item['status'] == 'ยกเลิก'
+                      ? item['status'] == 'ยกเลิก'
+                          ? SizedBox()
+                          : OutlinedButton(
+                              onPressed: () {},
+                              child: Text('ยกเลิก'),
+                            )
+                      : Row(
+                          children: [
+                            OutlinedButton(
+                              onPressed: () {},
+                              child: Text('ยืนยัน'),
+                            ),
+                            OutlinedButton(
+                              onPressed: () {},
+                              child: Text('ยกเลิก'),
+                            )
+                          ],
+                        ),
+                ],
+              ),
+              subtitle: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text('สถานะ :'),
+                      const SizedBox(width: 5),
+                      Text(item['status']),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text('ทันตแพทย์ :'),
+                      const SizedBox(width: 5),
+                      item['dentist_id'] == null
+                          ? Text('ยังไม่มี')
+                          : Text('มีแล้ว'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(item['symtom']),
+                    ],
                   ),
                 ],
               ),
-              subtitle: Text(item['symtom']),
             ),
           );
         },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
+import 'package:dental_clinic/pages/queue_page.dart';
 
 class Appointment extends StatefulWidget {
   const Appointment({Key? key, required this.userId}) : super(key: key);
@@ -87,12 +88,13 @@ class _AppointmentState extends State<Appointment> {
     final String symtom = _symtomController.text;
 
     await _connection.query(
-      'INSERT INTO appointment (patient_id, symtom, date_appoint,time_appoint) VALUES (@patient_id,@symtom, @date_appoint, @time_appoint)',
+      'INSERT INTO appointment (patient_id, symtom, date_appoint,time_appoint,status) VALUES (@patient_id,@symtom, @date_appoint, @time_appoint,@status)',
       substitutionValues: {
         'patient_id': widget.userId,
         'symtom': symtom,
         'date_appoint': selectedDate.toIso8601String(),
         'time_appoint': selectedTime.format(context),
+        'status': 'รอการยืนยันจากคลินิก',
       },
     );
   }
@@ -113,10 +115,23 @@ class _AppointmentState extends State<Appointment> {
         child: Center(
           child: Column(
             children: [
-              TextField(
-                controller: _symtomController,
-                decoration: InputDecoration(
-                  hintText: "Sypmtom",
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: Colors.grey),
+                ),
+                child: TextField(
+                  controller: _symtomController,
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    hintText: "อาการของคนไข้",
+                    border: InputBorder.none,
+                  ),
                 ),
               ),
               Checkbox(
@@ -134,7 +149,7 @@ class _AppointmentState extends State<Appointment> {
                   InkWell(
                     onTap: () => _selectDate(context),
                     child: Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           vertical: 12.0, horizontal: 16.0),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
@@ -142,11 +157,11 @@ class _AppointmentState extends State<Appointment> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today_outlined),
-                          SizedBox(width: 8.0),
+                          const Icon(Icons.calendar_today_outlined),
+                          const SizedBox(width: 8.0),
                           Text(
                             "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}",
-                            style: TextStyle(fontSize: 16.0),
+                            style: const TextStyle(fontSize: 16.0),
                           ),
                         ],
                       ),
@@ -155,7 +170,7 @@ class _AppointmentState extends State<Appointment> {
                   InkWell(
                     onTap: () => _selectTime(context),
                     child: Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           vertical: 12.0, horizontal: 16.0),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
@@ -163,11 +178,11 @@ class _AppointmentState extends State<Appointment> {
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today_outlined),
-                          SizedBox(width: 8.0),
+                          const Icon(Icons.calendar_today_outlined),
+                          const SizedBox(width: 8.0),
                           Text(
                             "${selectedTime.hour}:${selectedTime.minute}",
-                            style: TextStyle(fontSize: 16.0),
+                            style: const TextStyle(fontSize: 16.0),
                           ),
                         ],
                       ),
@@ -179,6 +194,15 @@ class _AppointmentState extends State<Appointment> {
                 onPressed: () {
                   debugPrint("Elevated Button");
                   _insertAppointment();
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QueuePage(
+                        userId: widget.userId,
+                      ),
+                    ),
+                  );
                 },
                 child: const Text('Confirm'),
               ),

@@ -6,7 +6,9 @@ import "package:flutter/material.dart";
 import 'package:dental_clinic/components/homepage_info.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  const Homepage({Key? key, required this.userId}) : super(key: key);
+
+  final int userId;
 
   @override
   State<Homepage> createState() => _HomepageState();
@@ -29,9 +31,11 @@ class _HomepageState extends State<Homepage> {
             const SizedBox(
               height: 30,
             ),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: HomeFunction(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: HomeFunction(
+                userId: widget.userId,
+              ),
             ),
             const SizedBox(
               height: 30,

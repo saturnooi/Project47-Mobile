@@ -74,10 +74,13 @@ class _ReviewState extends State<Review> {
                     });
                   },
                   child: Text(score.toString()),
-                  style: ElevatedButton.styleFrom(
-                    primary: score == _selectedScore
-                        ? Colors.green
-                        : null, // highlight selected score
+                  style: OutlinedButton.styleFrom(
+                    primary: score == _selectedScore ? Colors.green : null,
+                    side: BorderSide(
+                      color:
+                          score == _selectedScore ? Colors.green : Colors.grey,
+                      width: 2.0,
+                    ),
                   ),
                 ),
             ],
