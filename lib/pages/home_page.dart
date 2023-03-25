@@ -21,22 +21,26 @@ class _HomepageState extends State<Homepage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AspectRatio(
-              aspectRatio: 1.0, // Set aspect ratio to 1:1 for a square shape
-              child: Image.asset(
-                'images/318155147_157128447061141_6356677895157760046_n.jpg', // Replace with your image URL
-                fit: BoxFit.cover, // Scale and crop the image to fit the box
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: AspectRatio(
+                aspectRatio: 1.0, // Set aspect ratio to 1:1 for a square shape
+                child: Image.asset(
+                  'images/318155147_157128447061141_6356677895157760046_n.jpg', // Replace with your image URL
+                  fit: BoxFit.cover, // Scale and crop the image to fit the box
+                ),
               ),
             ),
             const SizedBox(
               height: 30,
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
+
+            Center(
               child: HomeFunction(
                 userId: widget.userId,
               ),
             ),
+
             const SizedBox(
               height: 30,
             ),

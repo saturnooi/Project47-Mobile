@@ -118,37 +118,58 @@ class _AppointmentState extends State<Appointment> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(color: Colors.grey),
-                ),
-                child: TextField(
-                  controller: _symtomController,
-                  maxLines: null,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: "อาการของคนไข้",
-                    border: InputBorder.none,
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: TextField(
+                    controller: _symtomController,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: const InputDecoration(
+                      hintText: "อาการของคนไข้",
+                      border: InputBorder.none,
+                    ),
                   ),
                 ),
               ),
-              Checkbox(
-                value: isCheckbox,
-                onChanged: (bool? newBool) {
-                  setState(
-                    () {
-                      isCheckbox = newBool;
-                    },
-                  );
-                },
+              const SizedBox(
+                height: 10,
               ),
               Row(
+                children: [
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Checkbox(
+                    value: isCheckbox,
+                    onChanged: (bool? newBool) {
+                      setState(
+                        () {
+                          isCheckbox = newBool;
+                        },
+                      );
+                    },
+                  ),
+                  Text('เลือกทันตแพทย์ที่ต้องการ')
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
                     onTap: () => _selectDate(context),
                     child: Container(
+                      width: 200,
                       padding: const EdgeInsets.symmetric(
                           vertical: 12.0, horizontal: 16.0),
                       decoration: BoxDecoration(
@@ -167,6 +188,9 @@ class _AppointmentState extends State<Appointment> {
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    width: 20,
+                  ),
                   InkWell(
                     onTap: () => _selectTime(context),
                     child: Container(
@@ -178,7 +202,7 @@ class _AppointmentState extends State<Appointment> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.calendar_today_outlined),
+                          // const Icon(Icons.calendar_today_outlined),
                           const SizedBox(width: 8.0),
                           Text(
                             "${selectedTime.hour}:${selectedTime.minute}",
@@ -189,6 +213,9 @@ class _AppointmentState extends State<Appointment> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 20,
               ),
               ElevatedButton(
                 onPressed: () {

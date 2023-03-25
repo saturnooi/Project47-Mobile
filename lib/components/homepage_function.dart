@@ -17,173 +17,217 @@ class HomeFunction extends StatelessWidget {
     return Column(
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QueuePage(
-                      userId: this.userId,
-                    ),
+            Column(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QueuePage(
+                          userId: this.userId,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Icon(
+                        Icons.calendar_month_outlined,
+                        size: 50,
+                      ),
+                      SizedBox(height: 10.0),
+                    ],
                   ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Icon(
-                    Icons.calendar_month_outlined,
-                    size: 50,
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Queue',
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
-                  ),
-                ],
-              ),
+                ),
+                Text(
+                  'Queue',
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                ),
+              ],
             ),
             const SizedBox(
               width: 20,
             ),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Appointment(
-                      userId: this.userId,
-                    ),
+            Column(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Appointment(
+                          userId: this.userId,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Icon(
+                        Icons.add_circle_outline,
+                        size: 50,
+                      ),
+                      SizedBox(height: 10.0),
+                    ],
                   ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Icon(
-                    Icons.add_circle_outline,
-                    size: 50,
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    'Booking',
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
-                  ),
-                ],
-              ),
+                ),
+                Text(
+                  'Booking',
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                ),
+              ],
             ),
             const SizedBox(
               width: 20,
             ),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DisplayDataScreen(),
+            Column(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DisplayDataScreen(),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Icon(
+                        Icons.newspaper_outlined,
+                        size: 50,
+                      ),
+                      const SizedBox(height: 10.0),
+                    ],
                   ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
-                    Icons.newspaper_outlined,
-                    size: 50,
-                  ),
-                  const SizedBox(height: 10.0),
-                  const Text(
-                    'Blog',
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
-                  ),
-                ],
-              ),
+                ),
+                const Text(
+                  'Blog',
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                ),
+              ],
             ),
           ],
         ),
         const SizedBox(
-          height: 10,
+          height: 20,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Dentist_Information(),
+            Column(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Dentist_Information(),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Icon(
+                        Icons.person_pin_outlined,
+                        size: 50,
+                      ),
+                      SizedBox(height: 10.0),
+                    ],
                   ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
-                    Icons.person_pin_outlined,
-                    size: 50,
-                  ),
-                  const SizedBox(height: 10.0),
-                  const Text(
-                    'Doctor',
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
-                  ),
-                ],
-              ),
+                ),
+                const Text(
+                  'Doctor',
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                ),
+              ],
             ),
             const SizedBox(
               width: 20,
             ),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Service(),
+            Column(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Service(),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Icon(
+                        Icons.description_outlined,
+                        size: 50,
+                      ),
+                      SizedBox(height: 10.0),
+                    ],
                   ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
-                    Icons.description_outlined,
-                    size: 50,
-                  ),
-                  const SizedBox(height: 10.0),
-                  const Text(
-                    'Service',
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
-                  ),
-                ],
-              ),
+                ),
+                const Text(
+                  'Service',
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                ),
+              ],
             ),
             const SizedBox(
               width: 20,
             ),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Review(),
+            Column(
+              children: [
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Review(),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Icon(
+                        Icons.comment_outlined,
+                        size: 50,
+                      ),
+                      SizedBox(height: 10.0),
+                    ],
                   ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(
-                    Icons.comment_outlined,
-                    size: 50,
-                  ),
-                  const SizedBox(height: 10.0),
-                  const Text(
-                    'Review',
-                    style: TextStyle(fontSize: 16.0, color: Colors.black),
-                  ),
-                ],
-              ),
+                ),
+                const Text(
+                  'Review',
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                ),
+              ],
             ),
           ],
         )

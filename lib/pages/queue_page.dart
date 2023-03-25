@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:postgres/postgres.dart';
+import 'package:dental_clinic/pages/main_page.dart';
 
 class QueuePage extends StatefulWidget {
   const QueuePage({Key? key, required this.userId}) : super(key: key);
@@ -44,6 +45,54 @@ class _QueuePageState extends State<QueuePage> {
   void initState() {
     super.initState();
     _fetchData();
+    _connectToDatabase();
+  }
+
+  late PostgreSQLConnection _connection;
+
+  Future<void> _connectToDatabase() async {
+    _connection = PostgreSQLConnection(
+      'localhost',
+      5432,
+      'clinic',
+      username: 'postgres',
+      password: '1234',
+    );
+
+    await _connection.open();
+  }
+
+  Future<void> _confirmAppointment() async {
+    await _connection.query(
+      'UPDATE appointment SET status = @status WHERE patient_id = @patient_id AND status = @status_old ',
+      substitutionValues: {
+        'patient_id': widget.userId,
+        'status': 'ยืนยัน',
+        'status_old': 'รอการยืนยันจากคนไข้',
+      },
+    );
+  }
+
+  Future<void> _cancelAppointment() async {
+    await _connection.query(
+      'UPDATE appointment SET status = @status WHERE patient_id = @patient_id AND status = @status_old',
+      substitutionValues: {
+        'patient_id': widget.userId,
+        'status': 'ยืนยัน',
+        'status_old': 'รอการยืนยันจากคนไข้',
+      },
+    );
+  }
+
+  Future<void> _cancel2Appointment() async {
+    await _connection.query(
+      'UPDATE appointment SET status = @status WHERE patient_id = @patient_id AND status = @status_old',
+      substitutionValues: {
+        'patient_id': widget.userId,
+        'status': 'ยกเลิก',
+        'status_old': 'รอการยืนยันจากคลินิก',
+      },
+    );
   }
 
   @override
@@ -84,17 +133,50 @@ class _QueuePageState extends State<QueuePage> {
                       ? item['status'] == 'ยกเลิก'
                           ? SizedBox()
                           : OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _cancel2Appointment();
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Mainpage(
+                                      userId: widget.userId,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: Text('ยกเลิก'),
                             )
                       : Row(
                           children: [
                             OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _confirmAppointment();
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Mainpage(
+                                      userId: widget.userId,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: Text('ยืนยัน'),
                             ),
                             OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _cancelAppointment();
+
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Mainpage(
+                                      userId: widget.userId,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: Text('ยกเลิก'),
                             )
                           ],
@@ -105,6 +187,7 @@ class _QueuePageState extends State<QueuePage> {
                 children: [
                   Row(
                     children: [
+                      const SizedBox(width: 21),
                       Text('สถานะ :'),
                       const SizedBox(width: 5),
                       Text(item['status']),
@@ -121,6 +204,9 @@ class _QueuePageState extends State<QueuePage> {
                   ),
                   Row(
                     children: [
+                      const SizedBox(width: 22),
+                      Text('อาการ :'),
+                      const SizedBox(width: 5),
                       Text(item['symtom']),
                     ],
                   ),
