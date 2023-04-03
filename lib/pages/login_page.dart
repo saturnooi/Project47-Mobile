@@ -191,7 +191,14 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(width: 1),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Register(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       "Register Now",
                       style: TextStyle(color: Colors.cyan),
