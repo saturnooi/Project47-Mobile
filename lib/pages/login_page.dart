@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     final password = _passwordController.text;
 
     final conn = PostgreSQLConnection(
-      'localhost',
+      '10.0.2.2',
       5432,
       'clinic',
       username: 'postgres',
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[300],
+      backgroundColor: Colors.cyan[400],
       body: Form(
         child: Center(
           child: Column(
@@ -146,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'Forgot Password?',
-                      style: TextStyle(color: Colors.grey[600]),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   Text(
                     'Don\' have an account?',
-                    style: TextStyle(color: Colors.grey[700]),
+                    style: TextStyle(color: Colors.white),
                   ),
                   const SizedBox(width: 1),
                   TextButton(
@@ -201,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: const Text(
                       "Register Now",
-                      style: TextStyle(color: Colors.cyan),
+                      style: TextStyle(color: Colors.blueGrey),
                     ),
                   ),
                 ],

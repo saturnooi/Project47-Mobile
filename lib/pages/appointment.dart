@@ -74,7 +74,7 @@ class _AppointmentState extends State<Appointment> {
 
   Future<void> _connectToDatabase() async {
     _connection = PostgreSQLConnection(
-      'localhost',
+      '10.0.2.2',
       5432,
       'clinic',
       username: 'postgres',

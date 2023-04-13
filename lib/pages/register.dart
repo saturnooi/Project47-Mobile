@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
     final String career = careerController.text;
 
     final conn = PostgreSQLConnection(
-      'localhost',
+      '10.0.2.2',
       5432,
       'clinic',
       username: 'postgres',

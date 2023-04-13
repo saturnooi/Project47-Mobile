@@ -17,7 +17,7 @@ class _QueuePageState extends State<QueuePage> {
 
   Future<void> _fetchData() async {
     final conn = PostgreSQLConnection(
-      'localhost',
+      '10.0.2.2',
       5432,
       'clinic',
       username: 'postgres',
@@ -52,7 +52,7 @@ class _QueuePageState extends State<QueuePage> {
 
   Future<void> _connectToDatabase() async {
     _connection = PostgreSQLConnection(
-      'localhost',
+      '10.0.2.2',
       5432,
       'clinic',
       username: 'postgres',

@@ -84,8 +84,11 @@ class _MainpageState extends State<Mainpage> {
               ),
             );
           },
-          child: Icon(Icons.add),
-          // Set the background color of the FloatingActionButton to transparent
+          child: const Icon(
+            Icons.add,
+            size: 50,
+            color: Colors.white,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

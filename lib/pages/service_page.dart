@@ -13,7 +13,7 @@ class _ServiceState extends State<Service> {
 
   Future<void> _fetchData() async {
     final conn = PostgreSQLConnection(
-      'localhost',
+      '10.0.2.2',
       5432,
       'clinic',
       username: 'postgres',

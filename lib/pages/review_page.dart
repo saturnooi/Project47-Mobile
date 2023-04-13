@@ -14,7 +14,7 @@ class _ReviewState extends State<Review> {
 
   Future<void> _fetchData() async {
     final conn = PostgreSQLConnection(
-      'localhost',
+      '10.0.2.2',
       5432,
       'clinic',
       username: 'postgres',
@@ -106,7 +106,7 @@ class _ReviewState extends State<Review> {
                             index < item['score']
                                 ? Icons.star
                                 : Icons.star_border,
-                            color: Colors.yellow,
+                            color: Color.fromARGB(255, 222, 201, 10),
                           );
                         }),
                       ),

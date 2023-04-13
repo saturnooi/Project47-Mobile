@@ -41,6 +41,7 @@ class HomeFunction extends StatelessWidget {
                       Icon(
                         Icons.calendar_month_outlined,
                         size: 50,
+                        color: Color.fromARGB(255, 100, 185, 255),
                       ),
                       SizedBox(height: 10.0),
                     ],
@@ -71,18 +72,19 @@ class HomeFunction extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
-                      const SizedBox(
+                      SizedBox(
                         height: 10,
                       ),
                       Icon(
                         Icons.add_circle_outline,
                         size: 50,
+                        color: Color.fromARGB(255, 100, 185, 255),
                       ),
                       SizedBox(height: 10.0),
                     ],
                   ),
                 ),
-                Text(
+                const Text(
                   'Booking',
                   style: TextStyle(fontSize: 16.0, color: Colors.black),
                 ),
@@ -104,15 +106,16 @@ class HomeFunction extends StatelessWidget {
                   },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const SizedBox(
+                    children: const <Widget>[
+                      SizedBox(
                         height: 10,
                       ),
-                      const Icon(
+                      Icon(
                         Icons.newspaper_outlined,
                         size: 50,
+                        color: Color.fromARGB(255, 100, 185, 255),
                       ),
-                      const SizedBox(height: 10.0),
+                      SizedBox(height: 10.0),
                     ],
                   ),
                 ),
@@ -137,7 +140,7 @@ class HomeFunction extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Dentist_Information(),
+                        builder: (context) => const Dentist_Information(),
                       ),
                     );
                   },
@@ -150,6 +153,7 @@ class HomeFunction extends StatelessWidget {
                       Icon(
                         Icons.person_pin_outlined,
                         size: 50,
+                        color: Color.fromARGB(255, 100, 185, 255),
                       ),
                       SizedBox(height: 10.0),
                     ],
@@ -171,7 +175,7 @@ class HomeFunction extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Service(),
+                        builder: (context) => const Service(),
                       ),
                     );
                   },
@@ -184,6 +188,7 @@ class HomeFunction extends StatelessWidget {
                       Icon(
                         Icons.description_outlined,
                         size: 50,
+                        color: Color.fromARGB(255, 100, 185, 255),
                       ),
                       SizedBox(height: 10.0),
                     ],
@@ -205,7 +210,7 @@ class HomeFunction extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Review(),
+                        builder: (context) => const Review(),
                       ),
                     );
                   },
@@ -218,6 +223,7 @@ class HomeFunction extends StatelessWidget {
                       Icon(
                         Icons.comment_outlined,
                         size: 50,
+                        color: Color.fromARGB(255, 100, 185, 255),
                       ),
                       SizedBox(height: 10.0),
                     ],

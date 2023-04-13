@@ -14,7 +14,7 @@ class ProfileTextField extends StatelessWidget {
       width: 300,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey,
+          color: Color.fromARGB(255, 107, 180, 239),
           width: 1.0,
         ),
         borderRadius: BorderRadius.circular(30.0),
@@ -22,12 +22,90 @@ class ProfileTextField extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 10),
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+          const SizedBox(width: 15),
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileTextFieldName extends StatelessWidget {
+  final String text;
+
+  const ProfileTextFieldName({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 145,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Color.fromARGB(255, 107, 180, 239),
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(width: 15),
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileTextFieldNamePrefix extends StatelessWidget {
+  final String text;
+
+  const ProfileTextFieldNamePrefix({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 65,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Color.fromARGB(255, 107, 180, 239),
+          width: 1.0,
+        ),
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(width: 15),
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text(
+              text,
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
           ),
         ],
@@ -50,7 +128,7 @@ class ProfileTextStringField extends StatelessWidget {
       width: 300,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.grey,
+          color: Color.fromARGB(255, 107, 180, 239),
           width: 1.0,
         ),
         borderRadius: BorderRadius.circular(30.0),
@@ -60,11 +138,14 @@ class ProfileTextStringField extends StatelessWidget {
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(8.0), // Set padding for the Container
-            child: Text(
-              text,
-              textAlign: TextAlign.justify, // Align the text to justify
-              style: const TextStyle(
-                  fontSize: 16), // Set the font size of the text
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                text,
+                textAlign: TextAlign.justify, // Align the text to justify
+                style: const TextStyle(
+                    fontSize: 16), // Set the font size of the text
+              ),
             ),
           ),
         ),

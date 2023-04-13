@@ -9,21 +9,21 @@ class HomeInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Column(
-          children: [
-            const Text('We Smile+ Clinic'),
-            const Text('เปิดบริการ 10.00 - 20.00 น.'),
-            const Text('ตั้งอยู่ที่ 321 ถ.เฉลิมพระเกียรติ'),
-            const Text('แขวงหนองบอน เขตประเวศ'),
-            const Text('กรุงเทพ 10520'),
+          children: const [
+            Text('We Smile+ Clinic'),
+            Text('เปิดบริการ 10.00 - 20.00 น.'),
+            Text('ตั้งอยู่ที่ 321 ถ.เฉลิมพระเกียรติ'),
+            Text('แขวงหนองบอน เขตประเวศ'),
+            Text('กรุงเทพ 10520'),
           ],
         ),
         const SizedBox(
-          width: 30,
+          width: 20,
         ),
         Image.asset(
           'images/clinic.jpg',
-          width: 100,
-          height: 100,
+          width: 140,
+          height: 200,
           fit: BoxFit.fill,
         ),
       ],
