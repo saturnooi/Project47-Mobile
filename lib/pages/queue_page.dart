@@ -17,12 +17,12 @@ class _QueuePageState extends State<QueuePage> {
 
   Future<void> _fetchData() async {
     final conn = PostgreSQLConnection(
-      '10.0.2.2',
-      5432,
-      'clinic',
-      username: 'postgres',
-      password: '1234',
-      // useSSL: true,
+      'db-postgresql-sgp1-56608-do-user-12968204-0.b.db.ondigitalocean.com',
+      25060,
+      'defaultdb',
+      username: 'doadmin',
+      password: 'AVNS_bXQmx_V8B3bMS_Dhhh2',
+      useSSL: true,
     );
     await conn.open();
 
@@ -134,15 +134,43 @@ class _QueuePageState extends State<QueuePage> {
                           ? SizedBox()
                           : OutlinedButton(
                               onPressed: () {
-                                _cancel2Appointment();
-
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Mainpage(
-                                      userId: widget.userId,
-                                    ),
-                                  ),
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('ต้องการยกเลิกหรือไม่'),
+                                      content: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          OutlinedButton(
+                                            onPressed: () {
+                                              _cancel2Appointment();
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Mainpage(
+                                                    userId: widget.userId,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Text('ตกลง'),
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          OutlinedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('ไม่ต้องการ'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                               child: Text('ยกเลิก'),
@@ -166,15 +194,43 @@ class _QueuePageState extends State<QueuePage> {
                             ),
                             OutlinedButton(
                               onPressed: () {
-                                _cancelAppointment();
-
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Mainpage(
-                                      userId: widget.userId,
-                                    ),
-                                  ),
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('ต้องการยกเลิกหรือไม่'),
+                                      content: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          OutlinedButton(
+                                            onPressed: () {
+                                              _cancelAppointment();
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Mainpage(
+                                                    userId: widget.userId,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: const Text('ตกลง'),
+                                          ),
+                                          const SizedBox(
+                                            width: 15,
+                                          ),
+                                          OutlinedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('ไม่ต้องการ'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                               child: Text('ยกเลิก'),

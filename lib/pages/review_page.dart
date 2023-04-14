@@ -14,12 +14,12 @@ class _ReviewState extends State<Review> {
 
   Future<void> _fetchData() async {
     final conn = PostgreSQLConnection(
-      '10.0.2.2',
-      5432,
-      'clinic',
-      username: 'postgres',
-      password: '1234',
-      // useSSL: true,
+      'db-postgresql-sgp1-56608-do-user-12968204-0.b.db.ondigitalocean.com',
+      25060,
+      'defaultdb',
+      username: 'doadmin',
+      password: 'AVNS_bXQmx_V8B3bMS_Dhhh2',
+      useSSL: true,
     );
     await conn.open();
 

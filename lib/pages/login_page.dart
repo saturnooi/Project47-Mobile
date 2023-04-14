@@ -26,16 +26,17 @@ class _LoginPageState extends State<LoginPage> {
     final password = _passwordController.text;
 
     final conn = PostgreSQLConnection(
-      '10.0.2.2',
-      5432,
-      'clinic',
-      username: 'postgres',
-      password: '1234',
+      'db-postgresql-sgp1-56608-do-user-12968204-0.b.db.ondigitalocean.com',
+      25060,
+      'defaultdb',
+      username: 'doadmin',
+      password: 'AVNS_bXQmx_V8B3bMS_Dhhh2',
+      useSSL: true,
     );
     await conn.open();
 
     final results = await conn.query(
-      'SELECT * FROM patient WHERE username = @username',
+      'SELECT * FROM "user" WHERE username = @username',
       substitutionValues: {'username': username},
     );
     if (results.isEmpty) {
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     final user = results.first.toColumnMap();
-    if (user['pass'] != password) {
+    if (user['password'] != password) {
       setState(() {
         _errorMessage = 'Invalid username or password.';
       });
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       context,
       MaterialPageRoute(
         builder: (context) => Mainpage(
-          userId: user['id'],
+          userId: user['patientId'],
         ),
       ),
     );

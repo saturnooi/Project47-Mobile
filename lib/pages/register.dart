@@ -107,11 +107,12 @@ class _RegisterState extends State<Register> {
 
   Future<void> _connectToDatabase() async {
     _connection = PostgreSQLConnection(
-      'localhost',
-      5432,
-      'clinic',
-      username: 'postgres',
-      password: '1234',
+      'db-postgresql-sgp1-56608-do-user-12968204-0.b.db.ondigitalocean.com',
+      25060,
+      'defaultdb',
+      username: 'doadmin',
+      password: 'AVNS_bXQmx_V8B3bMS_Dhhh2',
+      useSSL: true,
     );
 
     await _connection.open();

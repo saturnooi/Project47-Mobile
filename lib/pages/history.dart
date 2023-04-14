@@ -18,12 +18,12 @@ class _HistoryPageState extends State<HistoryPage> {
 
   Future<void> _fetchData() async {
     final conn = PostgreSQLConnection(
-      '10.0.2.2',
-      5432,
-      'clinic',
-      username: 'postgres',
-      password: '1234',
-      // useSSL: true,
+      'db-postgresql-sgp1-56608-do-user-12968204-0.b.db.ondigitalocean.com',
+      25060,
+      'defaultdb',
+      username: 'doadmin',
+      password: 'AVNS_bXQmx_V8B3bMS_Dhhh2',
+      useSSL: true,
     );
     await conn.open();
 
@@ -66,56 +66,194 @@ class _HistoryPageState extends State<HistoryPage> {
           // String showTime = "เวลา = $item[time_appoint']";
 
           return Card(
-            child: ListTile(
-              title: Row(
-                children: [
-                  Text(item['detail']),
-                  // Text("วันที่"),
-                  // const SizedBox(width: 5),
-                  // Text(day),
-                  // const SizedBox(width: 5),
-                  // Text(month),
-                  // const SizedBox(width: 5),
-                  // Text(year),
-                  (item['confirm_review']) == 0
-                      ? OutlinedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ReviewWrite(
-                                  userId: item['patient_id'],
-                                  detail: item['detail'],
+            child: OutlinedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      actions: [
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: IconButton(
+                            icon: Icon(Icons.close),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                      content: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                'อาการ : ',
+                                style: TextStyle(fontSize: 25),
+                              ),
+                              Text(
+                                item['detail'],
+                                style: const TextStyle(fontSize: 25),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              Text('แพทย์ผู้ดูแล : '),
+                              Text(item['dentist_id'].toString()),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            width: 300,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: SizedBox(
+                              height: 150, // Set the height of the SizedBox
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  padding: const EdgeInsets.all(
+                                      8.0), // Set padding for the Container
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      item['advise'],
+                                      textAlign: TextAlign
+                                          .justify, // Align the text to justify
+                                      style: const TextStyle(
+                                          fontSize:
+                                              16), // Set the font size of the text
+                                    ),
+                                  ),
                                 ),
                               ),
-                            );
-                          },
-                          child: Text('รีวิว'),
-                        )
-                      : SizedBox(),
-                ],
-              ),
-              subtitle: Column(
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Text('คำเนะนำ :'),
-                      const SizedBox(width: 5),
-                      Text(item['advise']),
-                    ],
+                  const SizedBox(
+                    height: 10,
                   ),
                   Row(
                     children: [
-                      Text('รีวิว :'),
-                      const SizedBox(width: 5),
+                      const Text(
+                        'อาการ : ',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        item['detail'],
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                       (item['confirm_review']) == 0
-                          ? Text('ยังไม่ได้รีวิว')
-                          : Text('เสร็จเรียบร้อย')
+                          ? OutlinedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ReviewWrite(
+                                      userId: item['patient_id'],
+                                      detail: item['detail'],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text('รีวิว'),
+                            )
+                          : const SizedBox(),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'แพทย์ผู้ดูแล : ',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      Text(
+                        item['dentist_id'].toString(),
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                 ],
               ),
             ),
+            // child: ListTile(
+            //   title: Row(
+            //     children: [
+            //       Text(item['detail']),
+            //       // Text("วันที่"),
+            //       // const SizedBox(width: 5),
+            //       // Text(day),
+            //       // const SizedBox(width: 5),
+            //       // Text(month),
+            //       // const SizedBox(width: 5),
+            //       // Text(year),
+            //       (item['confirm_review']) == 0
+            //           ? OutlinedButton(
+            //               onPressed: () {
+            //                 Navigator.push(
+            //                   context,
+            //                   MaterialPageRoute(
+            //                     builder: (context) => ReviewWrite(
+            //                       userId: item['patient_id'],
+            //                       detail: item['detail'],
+            //                     ),
+            //                   ),
+            //                 );
+            //               },
+            //               child: Text('รีวิว'),
+            //             )
+            //           : SizedBox(),
+            //     ],
+            //   ),
+            //   subtitle: Column(
+            //     children: [
+            //       Row(
+            //         children: [
+            //           Text('คำเนะนำ :'),
+            //           const SizedBox(width: 5),
+            //           Text(item['advise']),
+            //         ],
+            //       ),
+            //       Row(
+            //         children: [
+            //           Text('รีวิว :'),
+            //           const SizedBox(width: 5),
+            //           (item['confirm_review']) == 0
+            //               ? Text('ยังไม่ได้รีวิว')
+            //               : Text('เสร็จเรียบร้อย')
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
           );
         },
       ),
