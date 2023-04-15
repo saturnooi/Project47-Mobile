@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:postgres/postgres.dart';
 import 'package:dental_clinic/pages/main_page.dart';
@@ -139,8 +140,23 @@ class _QueuePageState extends State<QueuePage> {
           final item = _data[index];
           final date = DateTime.parse(item['date_appoint'].toString());
           final day = DateFormat.d().format(date);
-          final month = DateFormat.MMM().format(date);
+          final String month = DateFormat.MMM().format(date);
           final year = DateFormat.y().format(date);
+          final Map<String, String> englishToThaiMonths = {
+            'Jan': 'มกราคม',
+            'Feb': 'กุมภาพันธ์',
+            'Mar': 'มีนาคม',
+            'Apr': 'เมษายน',
+            'May': 'พฤษภาคม',
+            'Jun': 'มิถุนายน',
+            'Jul': 'กรกฎาคม',
+            'Aug': 'สิงหาคม',
+            'Sep': 'กันยายน',
+            'Oct': 'ตุลาคม',
+            'Nov': 'พฤศจิกายน',
+            'Dec': 'ธันวาคม',
+          };
+          final String? thaiMonth = englishToThaiMonths[month];
           // String showTime = "เวลา = $item[time_appoint']";
           return Card(
             child: OutlinedButton(
@@ -166,10 +182,16 @@ class _QueuePageState extends State<QueuePage> {
                           Row(
                             children: [
                               Text(
-                                "วันที่" + ' ' + day + ' ' + month + ' ' + year,
+                                "วันที่" +
+                                    ' ' +
+                                    day +
+                                    ' ' +
+                                    thaiMonth.toString() +
+                                    ' ' +
+                                    year,
                                 style: const TextStyle(
                                   color: Colors.black,
-                                  fontSize: 25,
+                                  fontSize: 21,
                                 ),
                               ),
                             ],
@@ -306,7 +328,12 @@ class _QueuePageState extends State<QueuePage> {
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: const Text('ไม่ต้องการ'),
+                                                child: const Text(
+                                                  'ไม่ต้องการ',
+                                                  style: TextStyle(
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -378,7 +405,12 @@ class _QueuePageState extends State<QueuePage> {
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: const Text('ไม่ต้องการ'),
+                                                child: const Text(
+                                                  'ไม่ต้องการ',
+                                                  style: TextStyle(
+                                                    color: Colors.redAccent,
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),

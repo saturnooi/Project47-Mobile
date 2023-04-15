@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
 import 'package:dental_clinic/api.dart';
+import 'package:dental_clinic/pages/details/blog.dart';
 
 class DisplayDataScreen extends StatefulWidget {
   @override
@@ -57,12 +58,28 @@ class _DisplayDataScreenState extends State<DisplayDataScreen> {
               children: [
                 ListTile(
                   title: Text(item['topic']),
-                  subtitle: Text(item['content']),
+                  subtitle: item['img'] != null && item['img'].isNotEmpty
+                      ? Image.network(
+                          item['img'],
+                          width: 200,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        )
+                      : Container(),
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlogDetail(
+                            blogId: item['id'],
+                          ),
+                        ),
+                      );
+                    },
                     child: const Text(
                       "Read more>>",
                       style: TextStyle(color: Colors.cyan),

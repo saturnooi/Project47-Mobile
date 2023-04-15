@@ -115,6 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ProfileTextField(text: _userData['email']),
                   const SizedBox(height: 10),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ProfileTextFieldNamePrefix(text: _userData['prefix']),
                       ProfileTextFieldName(text: _userData['first_name']),
@@ -126,9 +127,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 10),
                   ProfileTextField(text: _userData['tel']),
                   const SizedBox(height: 10),
-                  ProfileTextStringField(text: _userData['allergy']),
+                  ProfileTextStringField(
+                      text: 'ประวัติการแพ้ยา' + ' : ' + _userData['allergy']),
                   const SizedBox(height: 10),
-                  ProfileTextStringField(text: _userData['underlying_disease']),
+                  ProfileTextStringField(
+                      text: 'โรคประจำตัว' +
+                          ' : ' +
+                          _userData['underlying_disease']),
                 ],
               ),
             )

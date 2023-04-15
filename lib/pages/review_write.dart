@@ -79,6 +79,9 @@ class _ReviewWriteState extends State<ReviewWrite> {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             children: [
               Text('Score :'),

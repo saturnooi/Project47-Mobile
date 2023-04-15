@@ -49,7 +49,7 @@ class ProfileTextFieldName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 145,
+      width: 130,
       decoration: BoxDecoration(
         border: Border.all(
           color: Color.fromARGB(255, 107, 180, 239),
@@ -66,7 +66,7 @@ class ProfileTextFieldName extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 14,
               ),
             ),
           ),
@@ -104,7 +104,7 @@ class ProfileTextFieldNamePrefix extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 14,
               ),
             ),
           ),
@@ -144,7 +144,7 @@ class ProfileTextStringField extends StatelessWidget {
                 text,
                 textAlign: TextAlign.justify, // Align the text to justify
                 style: const TextStyle(
-                    fontSize: 16), // Set the font size of the text
+                    fontSize: 15), // Set the font size of the text
               ),
             ),
           ),
