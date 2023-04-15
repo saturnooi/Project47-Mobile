@@ -68,6 +68,7 @@ class _ReviewWriteState extends State<ReviewWrite> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {

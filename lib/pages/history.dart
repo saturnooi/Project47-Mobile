@@ -15,6 +15,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   List<Map<String, dynamic>> _data = [];
+  Map<String, dynamic> _dentistData = {};
 
   Future<void> _fetchData() async {
     final conn = PostgreSQLConnection(
@@ -28,11 +29,36 @@ class _HistoryPageState extends State<HistoryPage> {
     await conn.open();
 
     final results = await conn.query(
-      'SELECT * FROM history_appointment WHERE patient_id = @patient_id',
-    );
+        'SELECT * FROM history_appointment WHERE patient_id = @patient_id',
+        substitutionValues: {'patient_id': widget.userId});
+
     setState(() {
       _data = results.map((row) => row.toColumnMap()).toList();
     });
+
+    await conn.close();
+  }
+
+  Future<void> _dentist_name(int dentist_id) async {
+    final conn = PostgreSQLConnection(
+      'db-postgresql-sgp1-56608-do-user-12968204-0.b.db.ondigitalocean.com',
+      25060,
+      'defaultdb',
+      username: 'doadmin',
+      password: 'AVNS_bXQmx_V8B3bMS_Dhhh2',
+      useSSL: true,
+    );
+    await conn.open();
+
+    final results = await conn.query(
+        'SELECT * FROM dentist WHERE id = @dentist_id',
+        substitutionValues: {'dentist_id': dentist_id});
+
+    if (results.isNotEmpty) {
+      setState(() {
+        _dentistData = results.first.toColumnMap();
+      });
+    }
 
     await conn.close();
   }
@@ -47,6 +73,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -104,7 +131,24 @@ class _HistoryPageState extends State<HistoryPage> {
                           Row(
                             children: [
                               Text('แพทย์ผู้ดูแล : '),
-                              Text(item['dentist_id'].toString()),
+                              FutureBuilder<void>(
+                                future: _dentist_name(
+                                  item['dentist_id'],
+                                ),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<void> snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    return Text(_dentistData['prefix'] +
+                                        ' ' +
+                                        _dentistData['first_name'] +
+                                        ' ' +
+                                        _dentistData['last_name']);
+                                  } else {
+                                    return const CircularProgressIndicator();
+                                  }
+                                },
+                              ),
                             ],
                           ),
                           const SizedBox(
@@ -152,15 +196,10 @@ class _HistoryPageState extends State<HistoryPage> {
                     height: 10,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'อาการ : ',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
                       Text(
-                        item['detail'],
+                        'อาการ : ' + item['detail'],
                         style: const TextStyle(
                           color: Colors.black,
                         ),
@@ -178,7 +217,11 @@ class _HistoryPageState extends State<HistoryPage> {
                                   ),
                                 );
                               },
-                              child: const Text('รีวิว'),
+                              child: const Text(
+                                'รีวิว',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 170, 154, 4)),
+                              ),
                             )
                           : const SizedBox(),
                     ],
@@ -193,7 +236,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         style: TextStyle(color: Colors.black),
                       ),
                       Text(
-                        item['dentist_id'].toString(),
+                        'Click for more infomation',
                         style: TextStyle(color: Colors.black),
                       ),
                     ],

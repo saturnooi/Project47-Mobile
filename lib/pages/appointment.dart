@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
 import 'package:dental_clinic/pages/queue_page.dart';
+import 'dart:math';
 
 class Appointment extends StatefulWidget {
   const Appointment({Key? key, required this.userId}) : super(key: key);
@@ -88,22 +89,37 @@ class _AppointmentState extends State<Appointment> {
   Future<void> _insertAppointment() async {
     final String symtom = _symtomController.text;
 
-    await _connection.query(
-      'INSERT INTO appointment (patient_id, symtom, date_appoint,time_appoint,status) VALUES (@patient_id,@symtom, @date_appoint, @time_appoint,@status)',
-      substitutionValues: {
-        'patient_id': widget.userId,
-        'symtom': symtom,
-        'date_appoint': selectedDate.toIso8601String(),
-        'time_appoint': selectedTime.format(context),
-        'status': 'รอการยืนยันจากคลินิก',
-      },
-    );
+    int randomId = 0;
+    bool isIdUnique = false;
+    while (!isIdUnique) {
+      randomId = Random().nextInt(99999); // generate random ID
+      final result = await _connection.query(
+          'SELECT COUNT(*) FROM patient WHERE id = @id',
+          substitutionValues: {'id': randomId});
+      final count = result[0][0] as int;
+      isIdUnique = count == 0;
+    }
+
+    if (isIdUnique == true) {
+      await _connection.query(
+        'INSERT INTO appointment (id,patient_id, symtom, date_appoint,time_start,status) VALUES (@id,@patient_id,@symtom, @date_appoint, @time_appoint,@status)',
+        substitutionValues: {
+          'id': randomId,
+          'patient_id': widget.userId,
+          'symtom': symtom,
+          'date_appoint': selectedDate.toIso8601String(),
+          'time_appoint': selectedTime.format(context),
+          'status': 'รอการยืนยันจากคลินิก',
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {

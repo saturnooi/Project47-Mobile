@@ -40,6 +40,7 @@ class _Dentist_InformationState extends State<Dentist_Information> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
@@ -55,11 +56,17 @@ class _Dentist_InformationState extends State<Dentist_Information> {
           return Card(
             child: Column(
               children: [
-                Text(
-                  item['fullname'],
-                ),
-                Text(
-                  item['department'],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      item['prefix'] +
+                          ' ' +
+                          item['first_name'] +
+                          ' ' +
+                          item['last_name'],
+                    )
+                  ],
                 ),
                 Text(
                   item['email'],
