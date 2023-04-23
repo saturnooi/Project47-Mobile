@@ -21,16 +21,16 @@ class _BlogSlideState extends State<BlogSlide> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.0,
+      height: 270.0,
       child: PageView.builder(
         controller: _pageController,
         itemCount: widget.imageUrls.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: AspectRatio(
               aspectRatio: 1.0,
-              child: Image.asset(
+              child: Image.network(
                 widget.imageUrls[index],
                 fit: BoxFit.cover,
               ),

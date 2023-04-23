@@ -32,28 +32,27 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
-
             Center(
               child: HomeFunction(
                 userId: widget.userId,
               ),
             ),
-
             const SizedBox(
               height: 30,
             ),
             // BlogSlide(
             //   imageUrls: [
-            //     'images/promotion/328826896_971407020562041_1061909101623740239_n.jpg',
-            //     'images/promotion/333850256_1376115003210566_6169689804045578564_n.jpg',
-            //     'images/promotion/335158455_537778948344332_5717943067385041327_n.jpg',
-            //     'images/promotion/334163536_174009198739350_8560160510853555590_n.jpg',
+            //     'https://project-47.sgp1.digitaloceanspaces.com/blog/328826896_971407020562041_1061909101623740239_n.jpg',
+            //     'https://project-47.sgp1.digitaloceanspaces.com/blog/333378091_702341454972631_2235135710218911810_n.jpg',
+            //     'https://project-47.sgp1.digitaloceanspaces.com/blog/333850256_1376115003210566_6169689804045578564_n.jpg',
+            //     'https://project-47.sgp1.digitaloceanspaces.com/blog/335158455_537778948344332_5717943067385041327_n.jpg',
+            //     'https://project-47.sgp1.digitaloceanspaces.com/blog/336386430_1239359713390965_251830578152804460_n.jpg',
             //   ],
             // ),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             const Padding(
               padding: EdgeInsets.all(10.0),

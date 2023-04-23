@@ -102,13 +102,15 @@ class _AppointmentState extends State<Appointment> {
 
     if (isIdUnique == true) {
       await _connection.query(
-        'INSERT INTO appointment (id,patient_id, symtom, date_appoint,time_start,status) VALUES (@id,@patient_id,@symtom, @date_appoint, @time_appoint,@status)',
+        'INSERT INTO queue (id,"patientId", symtom, time_start,time_end,status) VALUES (@id,@patient_id,@symtom, @date_start , @date_end , @status)',
         substitutionValues: {
           'id': randomId,
           'patient_id': widget.userId,
           'symtom': symtom,
-          'date_appoint': selectedDate.toIso8601String(),
-          'time_appoint': selectedTime.format(context),
+          'date_start': DateTime(selectedDate.year, selectedDate.month,
+              selectedDate.day, selectedTime.hour, selectedTime.minute),
+          'date_end': DateTime(selectedDate.year, selectedDate.month,
+              selectedDate.day, selectedTime.hour, selectedTime.minute + 30),
           'status': 'รอการยืนยันจากคลินิก',
         },
       );

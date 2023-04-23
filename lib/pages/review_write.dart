@@ -8,11 +8,11 @@ class ReviewWrite extends StatefulWidget {
   const ReviewWrite({
     Key? key,
     required this.userId,
-    required this.detail,
+    required this.id,
   }) : super(key: key);
 
   final int userId;
-  final String detail;
+  final int id;
 
   @override
   State<ReviewWrite> createState() => _ReviewWriteState();
@@ -45,22 +45,21 @@ class _ReviewWriteState extends State<ReviewWrite> {
   Future<void> _insertReview() async {
     final comment = _commentController.text;
     await _connection.query(
-      'INSERT INTO review (reviewer_id,score,comment_review) values (@reviewer_id,@score,@comment_review)',
+      'INSERT INTO review (reviewer_id,score,comment) values (@reviewer_id,@score,@comment)',
       substitutionValues: {
         'reviewer_id': widget.userId,
         'score': _rating,
-        'comment_review': comment
+        'comment': comment
       },
     );
   }
 
   Future<void> _updateHistory() async {
     await _connection.query(
-        'UPDATE history_appointment SET confirm_review = @confirm_review WHERE patient_id = @patient_id AND detail = @detail',
+        'UPDATE history_appointment SET confirm_review = @confirm_review WHERE id = @id',
         substitutionValues: {
           'confirm_review': 1,
-          'patient_id': widget.userId,
-          'detail': widget.detail,
+          'id': widget.id,
         });
   }
 
@@ -132,7 +131,10 @@ class _ReviewWriteState extends State<ReviewWrite> {
               ),
             ],
           ),
-          ElevatedButton(
+          const SizedBox(
+            height: 20,
+          ),
+          OutlinedButton(
             onPressed: () {
               debugPrint("Elevated Button");
               _insertReview();
@@ -148,7 +150,13 @@ class _ReviewWriteState extends State<ReviewWrite> {
                 ),
               );
             },
-            child: const Text('Confirm'),
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                'Confirm',
+                style: TextStyle(fontSize: 15, color: Colors.black),
+              ),
+            ),
           ),
         ],
       ),

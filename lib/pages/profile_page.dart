@@ -99,16 +99,26 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    width: 120,
-                    height: 120,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: const Image(
-                        image: AssetImage('images/nat.png'),
-                      ),
-                    ),
-                  ),
+                  _userData['img'] != null && _userData['img'].isNotEmpty
+                      ? SizedBox(
+                          width: 120,
+                          height: 120,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.network(_userData['img']),
+                          ),
+                        )
+                      : SizedBox(
+                          width: 120,
+                          height: 120,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.network(
+                              'https://project-47.sgp1.digitaloceanspaces.com/profile-user/default_user_icon.jpg',
+                            ),
+                          ),
+                        ),
+
                   const SizedBox(height: 20),
                   // ProfileTextField(text: _userData['username']),
                   // const SizedBox(height: 10),

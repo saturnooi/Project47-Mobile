@@ -123,7 +123,7 @@ class _ReviewState extends State<Review> {
                             width: 15,
                           ),
                           Text(
-                            item['comment_review'],
+                            item['comment'],
                           ),
                         ],
                       ),

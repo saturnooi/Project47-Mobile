@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +31,7 @@ class _QueuePageState extends State<QueuePage> {
     await conn.open();
 
     final results = await conn.query(
-        'SELECT * FROM appointment WHERE patient_id = @patient_id',
+        'SELECT * FROM queue WHERE "patientId" = @patient_id',
         substitutionValues: {'patient_id': widget.userId});
     setState(() {
       _data = results.map((row) => row.toColumnMap()).toList();
@@ -90,7 +92,7 @@ class _QueuePageState extends State<QueuePage> {
 
   Future<void> _confirmAppointment(int appoint_id) async {
     await _connection.query(
-      'UPDATE appointment SET status = @status WHERE patient_id = @patient_id AND id = @appoint_id ',
+      'UPDATE queue SET status = @status WHERE "patientId" = @patient_id AND id = @appoint_id ',
       substitutionValues: {
         'patient_id': widget.userId,
         'status': 'ยืนยัน',
@@ -101,7 +103,7 @@ class _QueuePageState extends State<QueuePage> {
 
   Future<void> _cancelAppointment(int appoint_id) async {
     await _connection.query(
-      'UPDATE appointment SET status = @status WHERE patient_id = @patient_id AND id = @appoint_id',
+      'UPDATE queue SET status = @status WHERE "patientId" = @patient_id AND id = @appoint_id',
       substitutionValues: {
         'patient_id': widget.userId,
         'status': 'ยกเลิก',
@@ -112,7 +114,7 @@ class _QueuePageState extends State<QueuePage> {
 
   Future<void> _cancel2Appointment(int appoint_id) async {
     await _connection.query(
-      'UPDATE appointment SET status = @status WHERE patient_id = @patient_id AND id = @appoint_id',
+      'UPDATE queue SET status = @status WHERE "patientId" = @patient_id AND id = @appoint_id',
       substitutionValues: {
         'patient_id': widget.userId,
         'status': 'ยกเลิก',
@@ -138,10 +140,14 @@ class _QueuePageState extends State<QueuePage> {
         itemCount: _data.length,
         itemBuilder: (context, index) {
           final item = _data[index];
-          final date = DateTime.parse(item['date_appoint'].toString());
+          final date = DateTime.parse(item['time_start'].toString());
           final day = DateFormat.d().format(date);
           final String month = DateFormat.MMM().format(date);
           final year = DateFormat.y().format(date);
+          final hour = DateFormat.Hm().format(date);
+          final int thaiyear = int.parse(year) + 543;
+          final String thaiYearString = thaiyear.toString();
+
           final Map<String, String> englishToThaiMonths = {
             'Jan': 'มกราคม',
             'Feb': 'กุมภาพันธ์',
@@ -156,8 +162,25 @@ class _QueuePageState extends State<QueuePage> {
             'Nov': 'พฤศจิกายน',
             'Dec': 'ธันวาคม',
           };
+          final Map<String, String> englishToThaiMonths2 = {
+            'Jan': 'ม.ค.',
+            'Feb': 'ก.พ.',
+            'Mar': 'มี.ค.',
+            'Apr': 'เม.ย.',
+            'May': 'พ.ค.',
+            'Jun': 'มิ.ย.',
+            'Jul': 'ก.ค.',
+            'Aug': 'ส.ค.',
+            'Sep': 'ก.ย.',
+            'Oct': 'ต.ค.',
+            'Nov': 'พ.ย.',
+            'Dec': 'ธ.ค.',
+          };
           final String? thaiMonth = englishToThaiMonths[month];
-          // String showTime = "เวลา = $item[time_appoint']";
+          final String? thaiMonth2 = englishToThaiMonths2[month];
+          print(item['time_start'].runtimeType);
+          String showTime = "เวลา = $item[time_start']";
+
           return Card(
             child: OutlinedButton(
               onPressed: () {
@@ -188,7 +211,7 @@ class _QueuePageState extends State<QueuePage> {
                                     ' ' +
                                     thaiMonth.toString() +
                                     ' ' +
-                                    year,
+                                    thaiYearString,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 21,
@@ -197,25 +220,39 @@ class _QueuePageState extends State<QueuePage> {
                             ],
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'เวลาเริ่ม : ' + hour,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 21,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 15,
                           ),
                           Row(
                             children: [
                               const Text('แพทย์ผู้ดูแล : '),
-                              item['dentist_id'] == null
+                              item['dentistId'] == null
                                   ? const SizedBox()
                                   : FutureBuilder<void>(
                                       future: _dentist_name(
-                                        item['dentist_id'],
+                                        item['dentistId'],
                                       ),
                                       builder: (BuildContext context,
                                           AsyncSnapshot<void> snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.done) {
                                           return Text(_dentistData['prefix'] +
-                                              ' ' +
+                                              " " +
                                               _dentistData['first_name'] +
-                                              ' ' +
+                                              " " +
                                               _dentistData['last_name']);
                                         } else {
                                           return const CircularProgressIndicator();
@@ -281,7 +318,13 @@ class _QueuePageState extends State<QueuePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "วันที่" + ' ' + day + ' ' + month + ' ' + year,
+                        "วันที่" +
+                            ' ' +
+                            day +
+                            ' ' +
+                            thaiMonth2.toString() +
+                            ' ' +
+                            thaiYearString,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -289,7 +332,7 @@ class _QueuePageState extends State<QueuePage> {
                       ),
                       const SizedBox(width: 5),
                       item['status'] == 'รอการยืนยันจากคลินิก' ||
-                              item['status'] == 'ยืนยัน' ||
+                              item['status'] == 'รอพบทันตแพทย์' ||
                               item['status'] == 'ยกเลิก'
                           ? item['status'] == 'ยกเลิก'
                               ? const SizedBox()
@@ -433,6 +476,17 @@ class _QueuePageState extends State<QueuePage> {
                     children: [
                       Row(
                         children: [
+                          Text(
+                            '    เวลาเริ่ม  : ' + hour,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
                           const SizedBox(width: 21),
                           Text(
                             'สถานะ  :' + '  ' + item['status'],
@@ -453,7 +507,7 @@ class _QueuePageState extends State<QueuePage> {
                             ),
                           ),
                           const SizedBox(width: 5),
-                          item['dentist_id'] == null
+                          item['dentistId'] == null
                               ? const Text(
                                   'ยังไม่มี',
                                   style: TextStyle(

@@ -86,10 +86,27 @@ class _HistoryPageState extends State<HistoryPage> {
         itemCount: _data.length,
         itemBuilder: (context, index) {
           final item = _data[index];
-          // final date = DateTime.parse(item['date_appoint'].toString());
-          // final day = DateFormat.d().format(date);
-          // final month = DateFormat.MMM().format(date);
-          // final year = DateFormat.y().format(date);
+          final date = DateTime.parse(item['date_appoint'].toString());
+          final day = DateFormat.d().format(date);
+          final String month = DateFormat.MMM().format(date);
+          final year = DateFormat.y().format(date);
+          final int thaiyear = int.parse(year) + 543;
+          final String thaiYearString = thaiyear.toString();
+          final Map<String, String> englishToThaiMonths = {
+            'Jan': 'มกราคม',
+            'Feb': 'กุมภาพันธ์',
+            'Mar': 'มีนาคม',
+            'Apr': 'เมษายน',
+            'May': 'พฤษภาคม',
+            'Jun': 'มิถุนายน',
+            'Jul': 'กรกฎาคม',
+            'Aug': 'สิงหาคม',
+            'Sep': 'กันยายน',
+            'Oct': 'ตุลาคม',
+            'Nov': 'พฤศจิกายน',
+            'Dec': 'ธันวาคม',
+          };
+          final String? thaiMonth = englishToThaiMonths[month];
           // String showTime = "เวลา = $item[time_appoint']";
 
           return Card(
@@ -184,6 +201,27 @@ class _HistoryPageState extends State<HistoryPage> {
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'ทำเมื่อ : ' +
+                                    "วันที่" +
+                                    ' ' +
+                                    day +
+                                    ' ' +
+                                    thaiMonth.toString() +
+                                    ' ' +
+                                    thaiYearString,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     );
@@ -212,7 +250,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                   MaterialPageRoute(
                                     builder: (context) => ReviewWrite(
                                       userId: item['patient_id'],
-                                      detail: item['detail'],
+                                      id: item['id'],
                                     ),
                                   ),
                                 );

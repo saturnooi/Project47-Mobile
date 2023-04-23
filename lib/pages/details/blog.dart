@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:postgres/postgres.dart';
+// import 'package:quill_html_editor/quill_html_editor.dart';
+// import 'package:flutter_html/flutter_html.dart';
 
 class BlogDetail extends StatefulWidget {
   const BlogDetail({Key? key, required this.blogId});
@@ -65,8 +67,17 @@ class _BlogDetailState extends State<BlogDetail> {
                   ),
                   Row(
                     children: [
-                      Text(
-                        _blogData['topic'],
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Flexible(
+                        child: Text(
+                          _blogData['topic'],
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -84,9 +95,7 @@ class _BlogDetailState extends State<BlogDetail> {
                   const SizedBox(
                     height: 30,
                   ),
-                  Text(
-                    _blogData['content'],
-                  ),
+                  // Html(data: _blogData['content']),
                 ],
               ),
             )
