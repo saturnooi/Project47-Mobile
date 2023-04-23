@@ -95,7 +95,7 @@ class _QueuePageState extends State<QueuePage> {
       'UPDATE queue SET status = @status WHERE "patientId" = @patient_id AND id = @appoint_id ',
       substitutionValues: {
         'patient_id': widget.userId,
-        'status': 'ยืนยัน',
+        'status': 'รอพบทันตแพทย์',
         'appoint_id': appoint_id,
       },
     );
